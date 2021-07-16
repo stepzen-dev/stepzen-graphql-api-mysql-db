@@ -1,0 +1,11 @@
+type Countries {
+  GDPUSD: Int
+  country_name: String!
+  id: String
+  isoCode: String
+}
+
+type Query {
+  getCountriesList: [Countries]
+    @dbquery(type: "mysql", table: "countries", configuration: "mysql_config")
+}

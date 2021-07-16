@@ -1,0 +1,3 @@
+schema @sdl(files: ["graphql/api_everbase_co.graphql", "mysql/mysql.graphql"]) {
+  query: Query
+}

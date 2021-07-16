@@ -1,0 +1,698 @@
+"""
+A city is a large human settlement.
+"""
+type stepzen_City {
+  """
+  The continent.
+  """
+  continent: stepzen_Continent!
+  """
+  The country.
+  """
+  country: stepzen_Country!
+  """
+  The Geonames.org ID.
+  """
+  geonamesID: Int!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  The location.
+  """
+  location: stepzen_Coordinates
+  """
+  The name.
+  """
+  name: String!
+  """
+  The population.
+  """
+  population: Int!
+  """
+  The regular time zone (non-DST).
+  """
+  timeZone: stepzen_TimeZone
+  """
+  The time zone during daylight savings time.
+  """
+  timeZoneDST: stepzen_TimeZone
+}
+
+input stepzen_CityWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  countryName: stepzen_WhereString
+  population: stepzen_WhereFloat
+}
+
+"""
+Information about the client that sent the request.
+"""
+type stepzen_Client {
+  """
+  The IP address.
+  """
+  ipAddress: stepzen_IPAddress!
+  """
+  The user agent.
+  """
+  userAgent: String!
+}
+
+"""
+A continent is one of several very large landmasses.
+"""
+type stepzen_Continent {
+  """
+  All countries located on the continent.
+  """
+  countries: [stepzen_Country!]!
+  """
+  The Geonames.org ID.
+  """
+  geonamesID: Int!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  The name.
+  """
+  name: String!
+  """
+  The population.
+  """
+  population: Int!
+}
+
+input stepzen_ContinentWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  geonamesId: stepzen_WhereInt
+}
+
+"""
+Geographic coordinates.
+"""
+type stepzen_Coordinates {
+  """
+  Latitude.
+  """
+  lat: Float!
+  """
+  Longitude
+  """
+  long: Float!
+}
+
+"""
+A sovereign state.
+"""
+type stepzen_Country {
+  """
+  The ISO 3166-1 alpha-2 code.
+  """
+  alpha2Code: String!
+  """
+  The ISO 3166-1 alpha-3 code.
+  """
+  alpha3Code: String!
+  """
+  Calling codes.
+  """
+  callingCodes: String
+  """
+  The capital city.
+  """
+  capital: stepzen_City
+  """
+  All cities of the country.
+  """
+  cities: [stepzen_City!]!
+  """
+  The continent the country is located in.
+  """
+  continent: stepzen_Continent!
+  """
+  All official currencies of the country.
+  """
+  currencies: [stepzen_Currency!]!
+  """
+  The Geonames.org ID.
+  """
+  geonamesID: Int!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  All official languages of the country.
+  """
+  languages: [stepzen_Language!]!
+  """
+  The location.
+  """
+  location: stepzen_Coordinates
+  """
+  The name.
+  """
+  name: String!
+  """
+  The population.
+  """
+  population: Int!
+  """
+  The general VAT rate.
+  """
+  vatRate: Float
+}
+
+input stepzen_CountryWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  alpha2Code: stepzen_WhereString
+  alpha3Code: stepzen_WhereString
+  population: stepzen_WhereInt
+}
+
+type stepzen_Currency {
+  """
+  Convert `amount` (default 1) to currency with code specified in `to`
+  """
+  convert(amount: Float = 1, to: String!): Float
+  """
+  Countries that use the currency.
+  """
+  countries: [stepzen_Country!]!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  The ISO 4217 code.
+  """
+  isoCode: String!
+  """
+  The name.
+  """
+  name: String!
+  """
+  Unit symbols.
+  """
+  unitSymbols: [String!]!
+}
+
+input stepzen_CurrencyWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  isoCode: stepzen_WhereString
+}
+
+type stepzen_DNSRecords {
+  a: [stepzen_IPAddress!]!
+  aaaa: [stepzen_IPAddress!]!
+  cname: [stepzen_DomainName!]!
+  mx: [stepzen_MXRecord!]!
+}
+
+"""
+Domain Name of the Domain Name System (DNS).
+"""
+type stepzen_DomainName {
+  """
+  Look up A records.
+  """
+  a: [stepzen_IPAddress!]!
+  """
+  Look up AAAA records.
+  """
+  aaaa: [stepzen_IPAddress!]!
+  """
+  Look up CNAME records.
+  """
+  cname: [stepzen_DomainName!]!
+  """
+  Look up MX records.
+  """
+  mx: [stepzen_MXRecord!]!
+  """
+  The domain name.
+  """
+  name: String!
+  records: stepzen_DNSRecords!
+    @deprecated(reason: "Use fields on domainName itself")
+}
+
+type stepzen_EmailAddress {
+  """
+  The email address.
+  """
+  address: String!
+  """
+  The host as a domain name.
+  """
+  domainName: stepzen_DomainName!
+  """
+  Host part of the email address (after the @)
+  """
+  host: String!
+  """
+  Local part of the email address (before the @)
+  """
+  local: String!
+  """
+  Whether this address is backed by a working mail server
+  """
+  ok: Boolean!
+  serviceProvider: stepzen_EmailServiceProvider
+}
+
+type stepzen_EmailServiceProvider {
+  """
+  Whether this provider offers mailboxes without the need for signup
+  """
+  disposable: Boolean!
+  """
+  The domain name.
+  """
+  domainName: stepzen_DomainName!
+  """
+  Whether this provider offers mailboxes at no cost
+  """
+  free: Boolean!
+  """
+  Whether this provider's SMTP service is working
+  """
+  smtpOk: Boolean!
+}
+
+type stepzen_HTMLDocument {
+  """
+  Get all nodes that match selector.
+  """
+  all(selector: String!): [stepzen_HTMLNode!]!
+  """
+  Document body.
+  """
+  body: stepzen_HTMLNode!
+  """
+  Get first node that matches selector.
+  """
+  first(selector: String!): stepzen_HTMLNode
+  """
+  Raw HTML representation.
+  """
+  html: String!
+  """
+  Document title.
+  """
+  title: String
+}
+
+type stepzen_HTMLNode {
+  """
+  Get all nodes that match selector.
+  """
+  all(selector: String!): [stepzen_HTMLNode!]!
+  """
+  Attribute value.
+  """
+  attribute(name: String!, selector: String): String
+  """
+  Child nodes.
+  """
+  children: [stepzen_HTMLNode!]!
+  """
+  Get first node that matches selector.
+  """
+  first(selector: String!): stepzen_HTMLNode
+  """
+  Raw HTML representation.
+  """
+  html: String!
+  """
+  Next node.
+  """
+  next: stepzen_HTMLNode
+  """
+  Parent node.
+  """
+  parent: stepzen_HTMLNode
+  """
+  Previous node.
+  """
+  previous: stepzen_HTMLNode
+  """
+  Inner text.
+  """
+  text(selector: String): String
+}
+
+"""
+Internet Protocol address. Can be either a IPv4 or a IPv6 address.
+
+This product includes GeoLite2 data created by MaxMind, available from www.maxmind.com.
+"""
+type stepzen_IPAddress {
+  """
+  The IP address.
+  """
+  address: String!
+  """
+  The city this IP address belongs to.
+  """
+  city: stepzen_City
+  """
+  The country this IP address belongs to.
+  """
+  country: stepzen_Country
+  """
+  The IP address type.
+  """
+  type: stepzen_IPAddressType!
+}
+
+enum stepzen_IPAddressType {
+  IPv4
+  IPv6
+}
+
+type stepzen_Language {
+  """
+  The ISO 639-1 code.
+  """
+  alpha2Code: String!
+  """
+  The countries that use the language.
+  """
+  countries: [stepzen_Country!]!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  The name.
+  """
+  name: String!
+}
+
+input stepzen_LanguageWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  alpha2Code: stepzen_WhereString
+}
+
+type stepzen_MXRecord {
+  """
+  The domain name.
+  """
+  exchange: stepzen_DomainName!
+  """
+  The preference value.
+  """
+  preference: Int!
+}
+
+type stepzen_Markdown {
+  """
+  Convert markdown to HTML
+  """
+  html: String!
+}
+
+type GDPUSDForGraphql {
+  GDPUSD: Int
+  stepzen_timeZones: [stepzen_TimeZone!]!
+  @materializer(
+    query: "stepzen_timeZones"
+  )
+}
+
+"""
+Query is the root object of all queries.
+"""
+type Query {
+  """
+  Get cities.
+  """
+  stepzen_cities(
+    limit: Int
+    skip: Int
+    where: stepzen_CityWhere
+  ): [stepzen_City!]!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Get client info.
+  """
+  stepzen_client: stepzen_Client!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Get continents.
+  """
+  stepzen_continents(
+    limit: Int
+    skip: Int
+    where: stepzen_ContinentWhere
+  ): [stepzen_Continent!]!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Get countries.
+  """
+  stepzen_countries(
+    limit: Int
+    skip: Int
+    where: stepzen_CountryWhere
+  ): [stepzen_Country]
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+    GDPByCountryName(name: String!): GDPUSDForGraphql
+      @dbquery(type: "mysql", query: "SELECT GDPUSD FROM countries where ? = country_name", configuration: "mysql_config")
+  """
+  Get currencies.
+  """
+  stepzen_currencies(
+    limit: Int
+    skip: Int
+    where: stepzen_CurrencyWhere
+  ): [stepzen_Currency!]!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `DomainName` from string.
+  """
+  stepzen_domainName(name: String!): stepzen_DomainName!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `EmailAddress` from string.
+  """
+  stepzen_emailAddress(address: String!): stepzen_EmailAddress!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `HTMLDocument` from string.
+  """
+  stepzen_htmlDocument(html: String!): stepzen_HTMLDocument!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `IPAddress` from string.
+  """
+  stepzen_ipAddress(address: String!): stepzen_IPAddress!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Get languages.
+  """
+  stepzen_languages(
+    limit: Int
+    skip: Int
+    where: stepzen_LanguageWhere
+  ): [stepzen_Language!]!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `Markdown` from string.
+  """
+  stepzen_markdown(text: String!): stepzen_Markdown!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  stepzen_random(cacheBuster: String): stepzen_Random!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Get time zones.
+  """
+  stepzen_timeZones(
+    limit: Int
+    skip: Int
+    where: stepzen_TimeZoneWhere
+  ): [stepzen_TimeZone!]!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+  """
+  Create `URL` from string.
+  """
+  stepzen_url(url: String!): stepzen_URL!
+    @graphql(
+      endpoint: "https://api.everbase.co/graphql"
+      prefix: { value: "stepzen_", includeRootOperations: true }
+      configuration: "api_everbase_co_graphql_config"
+    )
+}
+
+"""
+Cryptographically secure random number generator.
+"""
+type stepzen_Random {
+  """
+  Generate a float.
+  """
+  float(
+    high: Float = 18437736874454810000
+    low: Float = -1.7976931348623157e+308
+  ): Int!
+  """
+  Generate a integer.
+  """
+  int(high: Int = 2147483647, low: Int = -2147483648): Int!
+  """
+  Generate a string.
+  """
+  string(length: Int = 16): String!
+}
+
+"""
+Time zone offset from UTC.
+"""
+type stepzen_TimeZone {
+  """
+  Cities in this time zone.
+  """
+  cities: [stepzen_City!]!
+  """
+  The Wikidata ID.
+  """
+  id: String!
+  """
+  The name.
+  """
+  name: String!
+  """
+  The UTC offset.
+  """
+  offset: Float!
+}
+
+input stepzen_TimeZoneWhere {
+  id: stepzen_WhereString
+  name: stepzen_WhereString
+  offset: stepzen_WhereFloat
+}
+
+"""
+Uniform Resource Locator (URL) in the form `<scheme>://<host><:port>/<path>?<query>`.
+"""
+type stepzen_URL {
+  """
+  The host as a domain name.
+  """
+  domainName: stepzen_DomainName
+  """
+  The host.
+  """
+  host: String!
+  """
+  Fetches the URL and returns `HTMLDocument`. Does not resolve redirects. Returns an error if the request fails or null if the response is not a HTML document.
+  """
+  htmlDocument: stepzen_HTMLDocument
+  """
+  The path.
+  """
+  path: String
+  """
+  The port.
+  """
+  port: Int
+  """
+  The query.
+  """
+  query: String
+  """
+  The scheme.
+  """
+  scheme: String!
+  """
+  The full URL.
+  """
+  url: String!
+}
+
+input stepzen_WhereFloat {
+  eq: Float
+  neq: Float
+  in: [Float!]
+  nin: [Float!]
+  lt: Float
+  gt: Float
+}
+
+input stepzen_WhereInt {
+  eq: Int
+  neq: Int
+  in: [Int!]
+  nin: [Int!]
+  lt: Int
+  gt: Int
+}
+
+input stepzen_WhereString {
+  eq: String
+  neq: String
+  in: [String!]
+  nin: [String!]
+}
