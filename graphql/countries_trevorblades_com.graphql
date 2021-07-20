@@ -1,0 +1,120 @@
+type Query {
+  sz_continents(filter: sz_ContinentFilterInput): [sz_Continent!]!
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_continent(code: ID!): sz_Continent
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_countries(filter: sz_CountryFilterInput): [sz_Country!]!
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_country(code: ID!): sz_Country
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_CountryWithGDP(code: ID!): sz_CountryWithGDP
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_languages(filter: sz_LanguageFilterInput): [sz_Language!]!
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+  sz_language(code: ID!): sz_Language
+    @graphql(
+      endpoint: "https://countries.trevorblades.com/"
+      prefix: { value: "sz_", includeRootOperations: true }
+    )
+    
+
+}
+
+input sz_ContinentFilterInput {
+  code: sz_StringQueryOperatorInput
+}
+
+input sz_StringQueryOperatorInput {
+  eq: String
+  ne: String
+  in: [String]
+  nin: [String]
+  regex: String
+  glob: String
+}
+
+type sz_Continent {
+  code: ID!
+  name: String!
+  countries: [sz_Country!]!
+}
+
+type sz_Country {
+  code: ID!
+  name: String!
+  native: String!
+  phone: String!
+  continent: sz_Continent!
+  capital: String
+  currency: String
+  languages: [sz_Language!]!
+  emoji: String!
+  emojiU: String!
+  states: [sz_State!]!
+}
+
+type sz_CountryWithGDP {
+  code: ID!
+  name: String!
+  native: String!
+  phone: String!
+  continent: sz_Continent!
+  capital: String
+  currency: String
+  languages: [sz_Language!]!
+  emoji: String!
+  emojiU: String!
+  states: [sz_State!]!
+  GDP: Int
+}
+
+type sz_Language {
+  code: ID!
+  name: String
+  native: String
+  rtl: Boolean!
+}
+
+type sz_State {
+  code: String
+  name: String!
+  country: sz_Country!
+}
+
+input sz_CountryFilterInput {
+  code: sz_StringQueryOperatorInput
+  currency: sz_StringQueryOperatorInput
+  continent: sz_StringQueryOperatorInput
+}
+
+input sz_LanguageFilterInput {
+  code: sz_StringQueryOperatorInput
+}
+
+enum sz_CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar sz_Upload

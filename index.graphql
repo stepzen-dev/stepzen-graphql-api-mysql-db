@@ -1,3 +1,6 @@
-schema @sdl(files: ["graphql/api_everbase_co.graphql", "mysql/mysql.graphql"]) {
+schema
+  @sdl(
+    files: ["graphql/countries_trevorblades_com.graphql", "mysql/mysql.graphql"]
+  ) {
   query: Query
 }
