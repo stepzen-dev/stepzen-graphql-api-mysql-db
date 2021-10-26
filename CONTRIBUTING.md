@@ -32,4 +32,4 @@ We'd love to hear your feedback at feedback@stepzen.com
 ## Learn More
 You can learn more in the [StepZen documentation](https://stepzen.com/docs).
 
-If you need assistance, feel free to [slide into our Discord channel](https://discord.com/invite/9k2VdPn2FR) -- you can also check out our SUPPORT.md doc
+If you need assistance, feel free to [slide into our Discord channel](https://discord.com/invite/9k2VdPn2FR)
