@@ -3,6 +3,12 @@ This is a sample that illustrates StepZen's GraphQL API and MySQL capabilities. 
 This way, you can get information from both the countries API and your database in a single query, so that your frontend can eliminate unnecessary client logic. 
 It's also super easy to get graphql and mysql schemas spun up using the StepZen CLI-- to learn how using this example, see [our blog post](#no-blog-post-yet).
 
+## Contribution
+
+If you'd like to contribute, please view our [guidelines](https://github.com/stepzen-samples/stepzen-graphql-api-mysql-db/blob/main/CONTRIBUTING.md) and [code of conduct](https://github.com/stepzen-samples/stepzen-graphql-api-mysql-db/blob/main/CODE_OF_CONDUCT.md) first.
+
+Here's our video walkthrough as well. In it, you'll [learn the steps for making a PR](https://www.youtube.com/watch?v=4B6xVyEc_CY&t=1285s) and the overall goals for our repos. It's for Hacktoberfest, but the process applies to our repos year-round. 
+
 ## Getting Started
 You'll need to create a [StepZen account](https://stepzen.com/request-invite) first. Once you've got that set up, [git clone](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone) this repository onto your machine and open the working directory.
 
