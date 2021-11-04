@@ -9,6 +9,8 @@ If you'd like to contribute, please view our [guidelines](https://github.com/ste
 
 Here's our video walkthrough as well. In it, you'll [learn the steps for making a PR](https://www.youtube.com/watch?v=4B6xVyEc_CY&t=1285s) and the overall goals for our repos. It's for Hacktoberfest, but the process applies to our repos year-round. 
 
+If you have any more questions about working with the sample, hit us up on [Discord](https://discord.com/invite/9k2VdPn2FR).
+
 ## Getting Started
 You'll need to create a [StepZen account](https://stepzen.com/request-invite) first. Once you've got that set up, [git clone](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone) this repository onto your machine and open the working directory.
 
