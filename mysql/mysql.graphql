@@ -5,9 +5,22 @@ type Countries {
   sz_Country: sz_Country @materializer(query: "sz_country" arguments: [{ name: "code" field: "code"}])
 }
 
+type debug {
+  args: JSON
+  data: JSON
+  files: JSON
+  form: JSON
+  headers: JSON
+  json: JSON
+  method: String
+  url: String
+}
+
 type Query {
   getCountriesList: [Countries]
     @dbquery(type: "mysql", table: "countries", configuration: "mysql_config")
   getCountryByCodeMySQL(code: ID!) : Countries
     @dbquery(type: "mysql", query: "SELECT * FROM countries where ? = code", configuration: "mysql_config")
+  debugger(id: String!): debug
+    @rest(endpoint:"https://httpbin.org/anything/$id")
 }
