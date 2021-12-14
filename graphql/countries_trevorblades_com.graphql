@@ -1,3 +1,6 @@
+"""
+fields for fetching information from tables "sz_continents", "sz_continent", "sz_countries", "sz_country", "sz_CountryWithGDP", "sz_languages", "sz_language".
+"""
 type Query {
   sz_continents(filter: sz_ContinentFilterInput): [sz_Continent!]!
     @graphql(
@@ -51,12 +54,18 @@ input sz_StringQueryOperatorInput {
   glob: String
 }
 
+"""
+fields for all continent information of type sz_Continent
+"""
 type sz_Continent {
   code: ID!
   name: String!
   countries: [sz_Country!]!
 }
 
+"""
+fields for all country information of type sz_Country
+"""
 type sz_Country {
   code: ID!
   name: String!
@@ -71,6 +80,9 @@ type sz_Country {
   states: [sz_State!]!
 }
 
+"""
+fields for a country with GDP information of type sz_CountryWithGDP
+"""
 type sz_CountryWithGDP {
   code: ID!
   name: String!
@@ -86,6 +98,9 @@ type sz_CountryWithGDP {
   GDP: Int
 }
 
+"""
+fields for all language information of type sz_language
+"""
 type sz_Language {
   code: ID!
   name: String
@@ -93,18 +108,27 @@ type sz_Language {
   rtl: Boolean!
 }
 
+"""
+fields for all state information of type sz_state
+"""
 type sz_State {
   code: String
   name: String!
   country: sz_Country!
 }
 
+"""
+fields for all country filter input information of type sz_CountryFilterInput
+"""
 input sz_CountryFilterInput {
   code: sz_StringQueryOperatorInput
   currency: sz_StringQueryOperatorInput
   continent: sz_StringQueryOperatorInput
 }
 
+"""
+field for all language filter input information of type sz_LanguageFilterInput
+"""
 input sz_LanguageFilterInput {
   code: sz_StringQueryOperatorInput
 }
