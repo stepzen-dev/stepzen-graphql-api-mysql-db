@@ -99,7 +99,7 @@ type sz_CountryWithGDP {
 }
 
 """
-fields for all language information of type sz_language
+fields for all language information of type sz_Language
 """
 type sz_Language {
   code: ID!
@@ -109,7 +109,7 @@ type sz_Language {
 }
 
 """
-fields for all state information of type sz_state
+fields for all state information of type sz_State
 """
 type sz_State {
   code: String
@@ -117,18 +117,12 @@ type sz_State {
   country: sz_Country!
 }
 
-"""
-fields for all country filter input information of type sz_CountryFilterInput
-"""
 input sz_CountryFilterInput {
   code: sz_StringQueryOperatorInput
   currency: sz_StringQueryOperatorInput
   continent: sz_StringQueryOperatorInput
 }
 
-"""
-field for all language filter input information of type sz_LanguageFilterInput
-"""
 input sz_LanguageFilterInput {
   code: sz_StringQueryOperatorInput
 }
