@@ -1,3 +1,6 @@
+"""
+fields for all countries of type Countries
+"""
 type Countries {
   GDP: Int
   code: ID
@@ -5,6 +8,9 @@ type Countries {
   sz_Country: sz_Country @materializer(query: "sz_country" arguments: [{ name: "code" field: "code"}])
 }
 
+"""
+fields for fetching information from table "Countries"
+"""
 type Query {
   getCountriesList: [Countries]
     @dbquery(type: "mysql", table: "countries", configuration: "mysql_config")
